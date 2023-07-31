@@ -120,7 +120,7 @@ def send_deploying_message(commit)
 end
 
 def send_deployed_message(commit)
-    telegram_text = "✅ Commit `#{commit}` has been deployed to the **#{ENV["STACK_NAME"]}** stack\\."
+    telegram_text = "✅ Commit `#{commit}` has been deployed to the *#{ENV["STACK_NAME"]}* stack\\."
 
     send_telegram_message(telegram_text)
 end
