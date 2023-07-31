@@ -225,7 +225,7 @@ get '/deploy/:token/:commit' do
         `scp -F /dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i #{ssh_key_path} -P #{ssh_port} ./stack.sh #{ssh_user}@#{ssh_host}:#{stack_dir}/`
 
         # run deploy script
-        `ssh -F /dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i #{ssh_key_path} -p #{ssh_port} #{ssh_user}@#{ssh_host} 'cd #{stack_dir} && git fetch origin #{branch} && git merge #{params[:commit]} && sh ./stack.sh #{stack_name} up -d | sh'`
+        `ssh -F /dev/null -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -i #{ssh_key_path} -p #{ssh_port} #{ssh_user}@#{ssh_host} 'cd #{stack_dir} && git fetch origin #{branch} && git merge #{params[:commit]} && sh./stack.sh #{stack_name} pull && sh ./stack.sh #{stack_name} up -d | sh'`
 
         puts "Deployed #{params[:commit]}"
         send_deployed_message(params[:commit])
