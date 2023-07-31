@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gem 'sinatra', '~> 3.0.6'
+gem 'puma'
+gem 'rack'
+gem 'telegram-bot-ruby', '~> 1.0'
