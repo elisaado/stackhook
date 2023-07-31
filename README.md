@@ -1,4 +1,5 @@
 # stackhook
+
 Deploy docker compose "stacks" with ease.
 
 Stackhook lets you know whenever there is a new push to the GitHub repository of your stack, and lets you deploy it instatly.
@@ -18,6 +19,7 @@ docker-compose up
 First you set up the stack on your server, making sure you are fully authenticated on git, with ssh keys to pull.
 
 Then
+
 1. decide on a domain
 2. set up a webhook on GitHub
 3. register a bot on telegram and get its token
@@ -26,7 +28,8 @@ Then
 6. deploy this app!
 
 ## Deployment example
-To deploy the app, you can build the image yourself using
+
+To deploy the app, you can either build the image yourself using
 
 ```bash
 docker build -t stackhook stackhook
@@ -34,8 +37,19 @@ docker build -t stackhook stackhook
 
 (notinng that the stackhook repository is located at `./stackhook`)
 
+Or, you can pull the image from the GitHub container registry
+
+```bash
+docker pull ghcr.io/elisaado/stackhook:master
+```
+
 Then, from wherever your `.env` is located, you can do
 
 ```bash
 docker run --env-file .env -p 9999:9999 -v "/home/stack/.ssh/id_ed25519:/app/ssh_key" -d stackhook
 ```
+
+Noting that
+
+- `stackhook` is the name of the image when building it yourself, and `ghcr.io/elisaado/stackhook:master` when pulling it from the registry.
+- `/home/stack/.ssh/id_ed25519` is the path to the ssh key that is used to ssh into the server and deploy the stack.
